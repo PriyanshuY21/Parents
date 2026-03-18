@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 97%;
+    --foreground: 215 28% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 28% 13%;
+
+    --primary: 165 82% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 28% 18%;
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 215 14% 45%;
+
+    --accent: 210 20% 94%;
+    --accent-foreground: 215 28% 13%;
+
+    --destructive: 0 62% 37%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 165 82% 30%;
+
+    --radius: 0.5rem;
+
+    /* HealthLens brand tokens */
+    --hl-navy: #0D1B2A;
+    --hl-navy2: #1E3148;
+    --hl-teal: #0D8A6E;
+    --hl-teal-l: #D4EDE8;
+    --hl-amber: #B5620A;
+    --hl-amber-l: #FDECD6;
+    --hl-red: #9B2020;
+    --hl-red-l: #FDEAEA;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+}
+
+/* ── Finding cards ─────────────────────────────────────────────────────────── */
+.hl-finding-card--high {
+  border-left: 4px solid var(--hl-red) !important;
+  background: var(--hl-red-l) !important;
+}
+.hl-finding-card--low {
+  border-left: 4px solid var(--hl-amber) !important;
+  background: var(--hl-amber-l) !important;
+}
+.hl-finding-card--ok {
+  border-left: 4px solid var(--hl-teal) !important;
+  background: var(--hl-teal-l) !important;
+}
+.hl-finding-card--info {
+  border-left: 4px solid #8d8d8d !important;
+}
+
+/* ── Gauge bar ─────────────────────────────────────────────────────────────── */
+.hl-gauge {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+.hl-gauge__fill {
+  height: 100%;
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hl-gauge__fill--high  { background: var(--hl-red); }
+.hl-gauge__fill--low   { background: var(--hl-amber); }
+.hl-gauge__fill--ok    { background: var(--hl-teal); }
+.hl-gauge__fill--info  { background: #8d8d8d; }
+
+/* ── Summary dark card ─────────────────────────────────────────────────────── */
+.hl-summary-card {
+  background: var(--hl-navy);
+  border-radius: 0.5rem;
+  padding: 1.5rem 2rem;
+  color: #f4f4f4;
+  margin-bottom: 1.5rem;
+}
+.hl-summary-card p {
+  font-size: 1.125rem;
+  font-style: italic;
+  line-height: 1.7;
+  opacity: 0.92;
+}
+
+/* ── Fade-up animation ─────────────────────────────────────────────────────── */
+@keyframes hl-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hl-animate {
+  animation: hl-fade-up 0.4s ease both;
+}

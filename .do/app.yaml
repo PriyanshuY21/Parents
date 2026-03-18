@@ -1,0 +1,40 @@
+name: testing
+region: nyc
+
+services:
+  - name: api
+    source_dir: server
+    run_command: node index.js
+    environment_slug: node-js
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    http_port: 4000
+    routes:
+      - path: /api
+    envs:
+      - key: GRADIENT_MODEL_ACCESS_KEY
+        type: SECRET
+        value: ""
+      - key: JWT_SECRET
+        type: SECRET
+        value: ""
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: ${APP_URL}
+      - key: GRADIENT_BASE_URL
+        value: https://inference.do-ai.run/v1
+      - key: GRADIENT_MODEL
+        value: claude-sonnet-4-6
+      - key: PORT
+        value: "4000"
+
+static_sites:
+  - name: frontend
+    source_dir: client
+    build_command: npm run build
+    output_dir: dist
+    routes:
+      - path: /
+    envs:
+      - key: VITE_API_URL
+        value: ${api.PUBLIC_URL}

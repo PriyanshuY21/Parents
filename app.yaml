@@ -1,0 +1,46 @@
+name: healthlens
+region: nyc
+
+services:
+  - name: api
+    source_dir: server
+    build_command: npm run build
+    run_command: node dist/index.js
+    environment_slug: node-js
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    http_port: 4000
+    routes:
+      - path: /api
+    envs:
+      - key: GRADIENT_MODEL_ACCESS_KEY
+        type: SECRET
+      - key: JWT_PRIVATE_KEY
+        type: SECRET
+      - key: JWT_PUBLIC_KEY
+        type: SECRET
+      - key: RECAPTCHA_SECRET_KEY
+        type: SECRET
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: ${APP_URL}
+      - key: RECAPTCHA_MIN_SCORE
+        value: "0.5"
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: RATE_LIMIT_MAX
+        value: "100"
+      - key: ANALYZE_RATE_LIMIT_MAX
+        value: "10"
+
+static_sites:
+  - name: frontend
+    source_dir: client
+    build_command: npm run build
+    output_dir: dist
+    environment_slug: node-js
+    envs:
+      - key: VITE_RECAPTCHA_SITE_KEY
+        type: SECRET
+    routes:
+      - path: /

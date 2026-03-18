@@ -1,0 +1,138 @@
+// HealthLens global styles — Carbon white theme overrides
+// Uses Carbon design tokens where possible
+
+:root {
+  --hl-paper: #F7F4EE;
+  --hl-navy: #0D1B2A;
+  --hl-navy2: #1E3148;
+  --hl-teal: #0D8A6E;
+  --hl-teal-l: #D4EDE8;
+  --hl-amber: #B5620A;
+  --hl-amber-l: #FDECD6;
+  --hl-red: #9B2020;
+  --hl-red-l: #FDEAEA;
+}
+
+body {
+  background-color: var(--hl-paper) !important;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+// Carbon side-nav customisation
+.cds--side-nav {
+  background-color: var(--hl-navy) !important;
+
+  .cds--side-nav__link,
+  .cds--side-nav__item {
+    color: rgba(255, 255, 255, 0.75) !important;
+
+    &:hover {
+      background-color: var(--hl-navy2) !important;
+      color: #fff !important;
+    }
+  }
+
+  .cds--side-nav__link--current {
+    background-color: var(--hl-navy2) !important;
+    color: #fff !important;
+    border-left: 3px solid var(--hl-teal) !important;
+  }
+}
+
+.cds--header {
+  background-color: var(--hl-navy) !important;
+  border-bottom-color: rgba(255,255,255,0.1) !important;
+
+  .cds--header__name {
+    color: #f4f4f4 !important;
+    font-weight: 300 !important;
+  }
+}
+
+// Main content padding to account for Carbon side-nav
+.hl-main-content {
+  margin-left: 256px;
+  padding: 2rem 2.5rem;
+  max-width: 1200px;
+
+  @media (max-width: 1055px) {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+// Finding cards
+.hl-finding-card {
+  &--high { border-left: 4px solid var(--hl-red) !important; background: var(--hl-red-l) !important; }
+  &--low  { border-left: 4px solid var(--hl-amber) !important; background: var(--hl-amber-l) !important; }
+  &--ok   { border-left: 4px solid var(--hl-teal) !important; background: var(--hl-teal-l) !important; }
+  &--info { border-left: 4px solid #8d8d8d !important; }
+}
+
+// Gauge bar animation
+.hl-gauge {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+
+  &__fill {
+    height: 100%;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &--high   { background: var(--hl-red); }
+    &--low    { background: var(--hl-amber); }
+    &--ok     { background: var(--hl-teal); }
+    &--info   { background: #8d8d8d; }
+  }
+}
+
+// Summary dark card
+.hl-summary-card {
+  background: var(--hl-navy);
+  border-radius: 4px;
+  padding: 1.5rem 2rem;
+  color: #f4f4f4;
+  margin-bottom: 1.5rem;
+
+  p {
+    font-size: 1.125rem;
+    font-style: italic;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+}
+
+// HIPAA banner
+.hl-hipaa-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: #fff8f0;
+  border: 1px solid #f1c21b;
+  border-left: 4px solid #f1c21b;
+  border-radius: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #4d3800;
+  margin-bottom: 1.5rem;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #f1c21b;
+  }
+}
+
+// Fade-up animation
+@keyframes hl-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hl-animate {
+  animation: hl-fade-up 0.4s ease both;
+}

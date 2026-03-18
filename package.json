@@ -1,0 +1,11 @@
+{
+  "name": "parents",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev",
+    "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean",
+    "start": "pnpm --filter server run start"
+  }
+}
